@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  crud_db:
+    image: mongo
+    container_name: crud_db
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - network_crud
+
+  crud:
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    image: nodejs
+    container_name: crud
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - PORT=7000
+      - NODE_ENV=production
+    ports:
+      - 7000:7000
+    networks:
+      - network_crud
+
+networks:
+  network_crud:
+    driver: bridge
