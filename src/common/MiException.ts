@@ -1,10 +1,10 @@
 class MiExcepcion extends Error {
-  codigo: number;
+  code: number;
 
   constructor(mensaje: string, codigo: number) {
     super(mensaje);
     Object.setPrototypeOf(this, MiExcepcion.prototype);
-    this.codigo = codigo;
+    this.code = codigo;
   }
 }
 

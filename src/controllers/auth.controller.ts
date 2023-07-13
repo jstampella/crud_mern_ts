@@ -1,0 +1,69 @@
+import { Request, Response } from 'express';
+import { httpResponse } from '../utils/handleResponse';
+import { handleHttpError } from '../utils/handleError';
+import MiExcepcion from '../common/MiException';
+import { matchedData } from 'express-validator';
+import { IUserLogin, IUserRegister } from '../interfaces/auth.interfaces';
+import { loginUser, registerNewUser, verifytoken } from '../services/auth.services';
+
+export const registerCtrl = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const requestData = matchedData(req) as IUserRegister;
+    const { token, ...responseUser } = await registerNewUser(requestData);
+    res.cookie('token', token, {
+      httpOnly: process.env.NODE_ENV !== 'development',
+      secure: true,
+      sameSite: 'none',
+    });
+    httpResponse(res, 201, { status: 'success', data: responseUser });
+  } catch (error) {
+    if (error instanceof MiExcepcion) {
+      handleHttpError(res, error);
+    } else if (error instanceof Error) {
+      handleHttpError(res, error);
+    }
+  }
+};
+
+export const loginCtrl = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const requestData = matchedData(req) as IUserLogin;
+    const { token, ...responseUser } = await loginUser(requestData);
+    res.cookie('token', token, {
+      httpOnly: process.env.NODE_ENV !== 'development',
+      secure: true,
+      sameSite: 'none',
+    });
+    httpResponse(res, 200, { status: 'success', data: responseUser });
+  } catch (error) {
+    if (error instanceof MiExcepcion) {
+      handleHttpError(res, error);
+    } else if (error instanceof Error) {
+      handleHttpError(res, error);
+    }
+  }
+};
+
+export const verifyTokenCtrl = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { token } = req.cookies;
+    if (!token) throw new MiExcepcion('El token no existe', 500);
+    const data = await verifytoken(token);
+    httpResponse(res, 200, { status: 'success', data });
+  } catch (error) {
+    if (error instanceof MiExcepcion) {
+      handleHttpError(res, error);
+    } else if (error instanceof Error) {
+      handleHttpError(res, error);
+    }
+  }
+};
+
+export const logoutCtrl = async (_req: Request, res: Response): Promise<void> => {
+  res.cookie('token', '', {
+    httpOnly: true,
+    secure: true,
+    expires: new Date(0),
+  });
+  httpResponse(res, 200, { status: 'success' });
+};

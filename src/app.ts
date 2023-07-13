@@ -25,7 +25,7 @@ app.use(cookieParser());
 // Agregar middleware de morgan
 app.use(morgan('dev'));
 
-app.use(router);
+app.use('/api', router);
 app.use(notFoundHandler);
 app.use(errorMiddleware);
 

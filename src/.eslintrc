@@ -11,7 +11,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "@typescript-eslint/no-invalid-void-type": "error",
+    "@typescript-eslint/no-invalid-void-type": "off",
     "linebreak-style": ["error", "unix"],
     "@typescript-eslint/explicit-function-return-type": [
       "error",
@@ -28,5 +28,5 @@
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "prettier/prettier": "error"
   },
-  "ignorePatterns": ["node_modules", "global.d.ts", "build","client"]
+  "ignorePatterns": ["node_modules", "global.d.ts", "build", "client"]
 }
