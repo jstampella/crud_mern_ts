@@ -1,10 +1,13 @@
+import { Request } from 'express';
+
 export interface IUserLogin {
   email: string;
   password: string;
 }
 
 export interface IUserRegister {
-  username: string;
+  id?: string;
+  name: string;
   email: string;
   password: string;
 }
@@ -15,6 +18,16 @@ export interface LoginPayload extends IUserRegister {
 
 export interface IVerifyToken {
   id: string;
-  username: string;
+  name: string;
   email: string;
+}
+
+export interface AuthenticatedRequest extends Request {
+  user?: AuthenticatedToken;
+}
+
+export interface AuthenticatedToken {
+  id: string;
+  iat: number;
+  exp: number;
 }

@@ -1,3 +1,4 @@
 import UsersModel from './user.model';
+import ClientModel from './client.model';
 
-export { UsersModel };
+export { UsersModel, ClientModel };

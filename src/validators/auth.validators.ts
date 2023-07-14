@@ -4,7 +4,7 @@ import { Request } from 'express-serve-static-core';
 import { NextFunction, Response } from 'express';
 
 const validatorRegister = [
-  check('username').exists().notEmpty().isLength({ min: 3, max: 99 }),
+  check('name').exists().notEmpty().isLength({ min: 3, max: 99 }),
   check('password').exists().notEmpty().isLength({ min: 3, max: 15 }),
   check('email').exists().notEmpty().isEmail(),
   (req: Request, res: Response, next: NextFunction): void => {
