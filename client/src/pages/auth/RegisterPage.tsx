@@ -18,12 +18,6 @@ interface useFormState {
   password: string;
 }
 
-// const formValidations = {
-//   email: [(value) => value.includes('@'), 'El correo debe de tener un @'],
-//   password: [(value) => value.length >= 6, 'El password debe de tener mas de 6 letras'],
-//   displayName: [(value) => value.length >= 1, 'El nombre es obligatorio.'],
-// };
-
 const stiloInput = {
   color: 'primary.main',
   '& label': {
@@ -51,7 +45,7 @@ export const RegisterPage = () => {
     isFormValid,
     onInputChange,
     formState,
-  } = useForm<useFormState>(formdata); // falta el formValidation
+  } = useForm<useFormState>(formdata);
 
   const onSubmit = (event: React.FormEvent<EventTarget>) => {
     event.preventDefault();

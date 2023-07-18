@@ -109,7 +109,6 @@ export const SearchClient = ({ clientParams }: Props) => {
     if (!isFormValid) return;
     const urlParams = objectToUrlParams(formSearch);
     navigate(`?${urlParams}`, { replace: false });
-    // if (urlParams !== '') await getSearchClient(urlParams);
     setFormSubmitted(false);
   };
 

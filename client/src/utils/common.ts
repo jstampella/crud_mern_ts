@@ -1,22 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import queryString from 'query-string';
 import { IClientFormSearch } from '../interfaces';
 
+/**
+ * Función que valida si una cadena contiene solo números
+ * @param str  string para validar
+ * @returns boolean
+ */
 export const validarNumeros = (str: string): boolean => {
   const numerosRegex = /^[0-9]+$/;
   return numerosRegex.test(str);
 };
 
+/**
+ * Función que valida si una cadena es solo letras
+ * @param cadena string para validar
+ * @returns boolean
+ */
 export const validarSoloLetras = (cadena: string): boolean => {
   const regex = /^[a-zA-Zá-úÁ-ÚüÜñÑ]+$/;
   return regex.test(cadena);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/**
+ * Funcion para convertir objeto en string url params
+ * @param obj object para convertir a string url
+ * @returns string &
+ */
 export const objectToUrlParams = (obj: Record<string, any>): string => {
   const params = Object.entries(obj)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .filter(([_, value]: [string, any]) => value !== null && value !== undefined)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .map(([key, value]: [string, any]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
   return params;
@@ -34,6 +47,12 @@ export const convertirSearchCliente = (
   };
 };
 
+/**
+ * Compara dos objetos y devuelve true si todos sus atributos son iguales, false en caso contrario.
+ * @param objeto1 El primer objeto a comparar.
+ * @param objeto2 El segundo objeto a comparar.
+ * @returns True si todos los atributos son iguales, false en caso contrario.
+ */
 export const compartirObjetos = <T>(objeto1: T, objeto2: T): boolean => {
   for (const propiedad in objeto1) {
     if (
@@ -57,6 +76,11 @@ export const hexToRgba = (hex: string, alpha: number) => {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
 
+/**
+ * Removes any undefined or empty properties from an object
+ * @param obj - The object to remove undefined and empty properties from
+ * @returns The object without undefined and empty properties
+ */
 export const removeUndefinedAndEmptyProperties = <T>(obj: T): T => {
   const newObj = { ...obj };
   for (const key in newObj) {

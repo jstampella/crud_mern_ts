@@ -29,15 +29,12 @@ const stiloInput = {
 export const LoginPage = () => {
   const { errorMessage } = useAppSelector((state) => state.auth);
   const { isAuthenticating, startLogin } = useAuthStore();
-  // const { status, errorMessage } = useSelector((state) => state.auth);
 
-  // const dispatch = useDispatch();
   const { email, password, onInputChange } = useForm<useFormState>(formdata);
 
   const onSubmit = (event: React.FormEvent<EventTarget>) => {
     event.preventDefault();
     startLogin({ email: email, password: password });
-    // dispatch(startLoginWithEmailPassword({ email, password }));
   };
 
   return (

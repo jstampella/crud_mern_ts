@@ -1,6 +1,10 @@
 import { AxiosError } from 'axios';
 import { ApiResponse } from '../interfaces';
 
+/**
+ * Function in charge of generating new throw according to the error with message
+ * @param error any Error
+ */
 export const handleError = (error: unknown) => {
   const axiosError = error as AxiosError;
 

@@ -6,11 +6,6 @@ import { LuLayoutDashboard } from 'react-icons/lu';
 import { FaShopify } from 'react-icons/fa';
 import { BsFillPeopleFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-// import PeopleIcon from '@mui/icons-material/People';
-// import BarChartIcon from '@mui/icons-material/BarChart';
-// import LayersIcon from '@mui/icons-material/Layers';
-// import AssignmentIcon from '@mui/icons-material/Assignment';
 
 export const mainListItems = (
   <React.Fragment>

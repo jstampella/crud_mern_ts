@@ -5,7 +5,7 @@ import { useClientStore } from '../hooks/useClientStore';
 import { IClient } from '../interfaces';
 import { AiOutlineLoading } from 'react-icons/ai';
 
-export const HomePage = () => {
+export const HomePage = (): JSX.Element => {
   const { getClientByUser } = useClientStore();
   const [recordsList, setRecordsList] = useState<IClient[] | undefined>(undefined);
 

@@ -20,7 +20,7 @@ const formInit = {
   sexo: '',
 };
 
-export function ClientsPage() {
+export const ClientsPage = (): JSX.Element => {
   const [clientParams, setClientParams] = useState(formInit);
   const { getClients, deleteClient, listClients, status, getSearchClient } = useClientStore();
   const dispatch = useDispatch();
@@ -179,4 +179,4 @@ export function ClientsPage() {
       </Box>
     </>
   );
-}
+};

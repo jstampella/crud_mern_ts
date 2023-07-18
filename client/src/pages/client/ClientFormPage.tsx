@@ -44,7 +44,7 @@ const stiloInput = {
   },
 };
 
-export const ClientFormPage = () => {
+export const ClientFormPage = (): JSX.Element => {
   const { createClient, updateclient, status, errorMessage, client, getClient } = useClientStore();
   const { notify } = useNotify();
   const dispatch = useDispatch();
@@ -71,7 +71,7 @@ export const ClientFormPage = () => {
     formState,
     isSubmit,
     onResetForm,
-  } = useForm<IClientCreate>(formData, formValidations); // falta el formValidation
+  } = useForm<IClientCreate>(formData, formValidations);
 
   const onSubmit = async (event: React.FormEvent<EventTarget>): Promise<void> => {
     event.preventDefault();
