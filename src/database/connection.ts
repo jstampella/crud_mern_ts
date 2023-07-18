@@ -9,7 +9,7 @@ export const connectDB = async (): Promise<void> => {
     mongoose.set('strictQuery', true);
     await mongoose.connect(MONGODB_URI);
     console.log('MongoDB is connected');
-    loadJson();
+    await loadJson();
   } catch (error) {
     logger.error('>>>> Error a la hora de inicializar BD <<<<', error);
   }

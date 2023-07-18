@@ -26,16 +26,15 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use('/api', router);
-app.use(notFoundHandler);
-app.use(errorMiddleware);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/dist'));
-
   app.get('*', (_req, res) => {
     console.log(path.resolve('client', 'dist', 'index.html'));
     res.sendFile(path.resolve('client', 'dist', 'index.html'));
   });
 }
+app.use(notFoundHandler);
+app.use(errorMiddleware);
 
 export default app;

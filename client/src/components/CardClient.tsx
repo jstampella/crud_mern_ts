@@ -17,16 +17,16 @@ export default function CardClient({ dni, nombre, apellido, url }: Props) {
     <Card sx={{ minWidth: 100, maxWidth: 300, flex: 1 }}>
       <CardContent sx={{ paddingBottom: 0 }}>
         <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-          dni: {dni}
+          DNI: {dni}
         </Typography>
         <Typography variant='h5' component='div'>
-          apellido: {apellido}
+          Apellido: {apellido}
         </Typography>
-        <Typography color='text.secondary'>nombre: {nombre}</Typography>
+        <Typography color='text.secondary'>Nombre: {nombre}</Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: 'flex-end' }} color='background.default'>
         <Link component={RouterLink} color={'inherit'} to={url} sx={{ pr: 2 }}>
-          Ver
+          VER
         </Link>
       </CardActions>
     </Card>

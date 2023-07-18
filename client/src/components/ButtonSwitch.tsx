@@ -4,6 +4,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { useDispatch } from 'react-redux';
 import { setThemeState } from '../store/ui';
+import Moonicon from '../assets/moon_icon.svg';
+import Sunicon from '../assets/sun_icon.svg';
+
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -16,7 +19,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       color: '#fff',
       transform: 'translateX(22px)',
       '& .MuiSwitch-thumb:before': {
-        backgroundImage: 'url("/src/assets/moon_icon.svg")',
+        backgroundImage: `url(${Moonicon})`,
         backgroundSize: 'contain',
       },
       '& + .MuiSwitch-track': {
@@ -38,7 +41,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       top: 0,
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      backgroundImage: 'url("/src/assets/sun_icon.svg")',
+      backgroundImage: `url(${Sunicon})`,
       backgroundSize: 'contain',
     },
   },
