@@ -4,14 +4,28 @@ import { handleHttpError } from '../utils/handleError';
 import MiExcepcion from '../common/MiException';
 import { matchedData } from 'express-validator';
 import { ClientModel } from '../models';
-import { ClientRequest, IClient } from '../interfaces/client.interfaces';
-import { createClient } from '../services/client.services';
+import { ClientRequest, IClient, IClientParams } from '../interfaces/client.interfaces';
+import { createClient, getClientsAll } from '../services/client.services';
+
+export const getClientsAllCtrl = async (req: ClientRequest, res: Response): Promise<void> => {
+  try {
+    const params = matchedData(req) as IClientParams;
+    const data = await getClientsAll(params);
+    httpResponse(res, 200, { status: 'success', data });
+  } catch (error) {
+    if (error instanceof MiExcepcion) {
+      handleHttpError(res, error);
+    } else if (error instanceof Error) {
+      handleHttpError(res, error);
+    }
+  }
+};
 
 export const getClientsCtrl = async (req: ClientRequest, res: Response): Promise<void> => {
   try {
     const user = req.user?.id;
     if (!user) throw new MiExcepcion('No existe el id de usuario!', 404);
-    const clients = await ClientModel.find({ user }).populate('user');
+    const clients = await ClientModel.find({ user }).populate('user', '-password');
     httpResponse(res, 200, { status: 'success', data: clients });
   } catch (error) {
     if (error instanceof MiExcepcion) {

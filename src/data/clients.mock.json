@@ -1,0 +1,154 @@
+[
+  {
+    "dni": 111111111,
+    "nombre": "Carlos",
+    "apellido": "Gómez",
+    "sexo": "M",
+    "telefono": "1111111111",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 222222222,
+    "nombre": "Ana",
+    "apellido": "López",
+    "sexo": "F",
+    "telefono": "2222222222",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 333333333,
+    "nombre": "Pedro",
+    "apellido": "Rodríguez",
+    "sexo": "M",
+    "telefono": "3333333333",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 444444444,
+    "nombre": "María",
+    "apellido": "Fernández",
+    "sexo": "F",
+    "telefono": "4444444444",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 555555555,
+    "nombre": "Javier",
+    "apellido": "González",
+    "sexo": "M",
+    "telefono": "5555555555",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 666666666,
+    "nombre": "Laura",
+    "apellido": "Torres",
+    "sexo": "F",
+    "telefono": "6666666666",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 777777777,
+    "nombre": "Alejandro",
+    "apellido": "Hernández",
+    "sexo": "M",
+    "telefono": "7777777777",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 888888888,
+    "nombre": "Sofía",
+    "apellido": "Martínez",
+    "sexo": "F",
+    "telefono": "8888888888",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 999999999,
+    "nombre": "Gabriel",
+    "apellido": "Sánchez",
+    "sexo": "M",
+    "telefono": "9999999999",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 123456789,
+    "nombre": "Luisa",
+    "apellido": "Ramírez",
+    "sexo": "F",
+    "telefono": "1234509876",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 987654321,
+    "nombre": "Andrés",
+    "apellido": "Luna",
+    "sexo": "M",
+    "telefono": "9876512345",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 111222333,
+    "nombre": "Camila",
+    "apellido": "Díaz",
+    "sexo": "F",
+    "telefono": "1112223334",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 444555666,
+    "nombre": "Diego",
+    "apellido": "Vargas",
+    "sexo": "M",
+    "telefono": "4445556667",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 777888999,
+    "nombre": "Valentina",
+    "apellido": "Rojas",
+    "sexo": "F",
+    "telefono": "7778889990",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 123123123,
+    "nombre": "Martín",
+    "apellido": "Cabrera",
+    "sexo": "M",
+    "telefono": "1231231234",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 456456456,
+    "nombre": "Lucía",
+    "apellido": "Giménez",
+    "sexo": "F",
+    "telefono": "4564564567",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 789789789,
+    "nombre": "Fernando",
+    "apellido": "Herrera",
+    "sexo": "M",
+    "telefono": "7897897890",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 654321987,
+    "nombre": "Eduardo",
+    "apellido": "Mendoza",
+    "sexo": "M",
+    "telefono": "6543219870",
+    "user": "610a23736b9a6e0015b0a3d5"
+  },
+  {
+    "dni": 321654987,
+    "nombre": "Marcela",
+    "apellido": "Ríos",
+    "sexo": "F",
+    "telefono": "3216549870",
+    "user": "610a23736b9a6e0015b0a3d5"
+  }
+]

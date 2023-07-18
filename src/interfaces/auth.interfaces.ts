@@ -12,12 +12,15 @@ export interface IUserRegister {
   password: string;
 }
 
-export interface LoginPayload extends IUserRegister {
+export interface LoginPayload {
+  _id?: string;
+  name: string;
+  email: string;
   token: string;
 }
 
 export interface IVerifyToken {
-  id: string;
+  _id: string;
   name: string;
   email: string;
 }

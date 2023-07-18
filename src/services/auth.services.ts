@@ -30,9 +30,9 @@ const registerNewUser = async ({ name, email, password }: IUserRegister): Promis
   if (token === undefined) throw new MiExcepcion('fallo la creacion del token', 400);
 
   const responseData: LoginPayload = {
+    _id: userSaved._id.toString(),
     name,
     email,
-    password,
     token,
   };
   return responseData;
@@ -49,15 +49,15 @@ const loginUser = async ({ email, password }: IUserLogin): Promise<LoginPayload>
 
   // create access token
   const token = await createAccessToken({
-    id: checkIs._id,
+    _id: checkIs._id,
     name: checkIs.name,
   });
 
   if (token === undefined) throw new MiExcepcion('fallo la creacion del token', 400);
   const data: LoginPayload = {
+    _id: checkIs._id.toString(),
     name: checkIs.name,
     email,
-    password,
     token,
   };
   return data;
@@ -65,14 +65,16 @@ const loginUser = async ({ email, password }: IUserLogin): Promise<LoginPayload>
 
 const verifytoken = async (token: string): Promise<IVerifyToken> => {
   try {
-    const data = jwt.verify(token, TOKEN_SECRET) as { id: string };
-    const userFound = await UsersModel.findById(data.id);
+    const decode = jwt.verify(token, TOKEN_SECRET) as { id: string };
+    const userFound = await UsersModel.findById(decode.id);
+    console.log(userFound);
     if (!userFound) throw new MiExcepcion('usuario inexistente', 401);
-    return {
-      id: userFound._id.toString(),
+    const data: IVerifyToken = {
+      _id: userFound._id.toString(),
       name: userFound.name,
       email: userFound.email,
     };
+    return data;
   } catch (error) {
     throw new MiExcepcion('fallo al validar token', 401);
   }

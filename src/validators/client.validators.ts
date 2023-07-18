@@ -29,4 +29,23 @@ const validatorDeleteClient = [
   },
 ];
 
-export { validatorCreateClient, validatorUpdateClient, validatorDeleteClient };
+const validatorPaginationClient = [
+  check('page').optional().exists().notEmpty().isNumeric(),
+  check('limit').optional().exists().notEmpty().isNumeric(),
+  (req: Request, res: Response, next: NextFunction): void => {
+    return validateResults(req, res, next);
+  },
+];
+
+const validatorSearchClient = [
+  check('dni').optional().exists().notEmpty().isNumeric(),
+  check('nombre').optional().exists().notEmpty().isString(),
+  check('apellido').optional().exists().notEmpty().isString(),
+  check('sexo').optional().exists().notEmpty().isString(),
+  check('telefono').optional().exists().notEmpty().isNumeric(),
+  (req: Request, res: Response, next: NextFunction): void => {
+    return validateResults(req, res, next);
+  },
+];
+
+export { validatorCreateClient, validatorUpdateClient, validatorDeleteClient, validatorPaginationClient, validatorSearchClient };

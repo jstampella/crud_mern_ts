@@ -14,3 +14,13 @@ export interface IClient {
 export interface ClientRequest extends Request {
   user?: IUserRegister;
 }
+
+export interface IClientParams {
+  dni?: number;
+  nombre?: string;
+  apellido?: string;
+  sexo?: string;
+  telefono?: number;
+  limit?: number;
+  page?: number;
+}
