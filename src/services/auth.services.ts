@@ -24,7 +24,7 @@ const registerNewUser = async ({ name, email, password }: IUserRegister): Promis
 
   // create access token
   const token = await createAccessToken({
-    id: userSaved._id,
+    _id: userSaved._id,
   });
 
   if (token === undefined) throw new MiExcepcion('fallo la creacion del token', 400);
