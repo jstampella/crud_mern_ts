@@ -33,3 +33,13 @@ export const verifyTokenRequest = async (): Promise<IUserPayload> => {
     return Promise.reject<IUserPayload>(handleError(error));
   }
 };
+
+export const logoutApi = async (): Promise<IUserPayload> => {
+  try {
+    const resp: AxiosResponse<ApiResponse> = await axios.get<ApiResponse>('/auth/logout');
+    const response: IUserPayload = resp.data.data;
+    return response;
+  } catch (error: unknown) {
+    return Promise.reject<IUserPayload>(handleError(error));
+  }
+};

@@ -58,6 +58,16 @@ export const getClientByIdApi = async (id: string): Promise<IClient> => {
   }
 };
 
+export const getClientByUserApi = async (): Promise<IClient[]> => {
+  try {
+    const resp: AxiosResponse<ApiResponse> = await axios.get<ApiResponse>('/client');
+    const response: IClient[] = resp.data.data;
+    return response;
+  } catch (error: unknown) {
+    return Promise.reject<IClient[]>(handleError(error));
+  }
+};
+
 export const getClientSearchApi = async (search: string): Promise<IClientPagination> => {
   try {
     const resp: AxiosResponse<ApiResponse> = await axios.get<ApiResponse>(`/client/all${search}`);
@@ -67,13 +77,3 @@ export const getClientSearchApi = async (search: string): Promise<IClientPaginat
     return Promise.reject<IClientPagination>(handleError(error));
   }
 };
-
-// export const getTasksRequest = async () => axios.get('/tasks');
-
-// export const createTaskRequest = async (task) => axios.post('/tasks', task);
-
-// export const updateTaskRequest = async (task) => axios.put(`/tasks/${task._id}`, task);
-
-// export const deleteTaskRequest = async (id) => axios.delete(`/tasks/${id}`);
-
-// export const getTaskRequest = async (id) => axios.get(`/tasks/${id}`);

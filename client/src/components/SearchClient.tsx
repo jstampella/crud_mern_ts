@@ -141,7 +141,7 @@ export const SearchClient = ({ clientParams }: Props) => {
         <AccordionDetails>
           <form onSubmit={onSubmit}>
             <Grid container sx={{ justifyContent: 'space-between' }}>
-              <Grid item xs={12} sm={9} sx={{ pr: 4, mt: 2 }}>
+              <Box sx={{ m: 1, flex: 1, minWidth: '200px' }}>
                 <TextField
                   sx={stiloInput}
                   label='DNI'
@@ -155,9 +155,9 @@ export const SearchClient = ({ clientParams }: Props) => {
                   helperText={dniValid}
                   FormHelperTextProps={{ sx: { color: 'red' } }}
                 />
-              </Grid>
-              <Grid item xs={12} sm={3} sx={{ mt: 2, minWidth: '130px' }}>
-                <FormControl sx={{ ...stiloInput, width: '100%' }} size='small'>
+              </Box>
+              <Box sx={{ m: 1, minWidth: '80px' }}>
+                <FormControl sx={{ ...stiloInput, minWidth: '80px' }} size='small'>
                   <InputLabel id='demo-select-small-label'>Sexo</InputLabel>
                   <Select
                     labelId='demo-select-small-label'
@@ -177,8 +177,8 @@ export const SearchClient = ({ clientParams }: Props) => {
                   </Select>
                   <FormHelperText sx={{ color: 'red' }}>{sexoValid}</FormHelperText>
                 </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6} sx={{ mt: 2, minWidth: '130px' }}>
+              </Box>
+              <Box sx={{ m: 1, minWidth: '80px', flex: 1 }}>
                 <TextField
                   sx={stiloInput}
                   label='Nombre'
@@ -192,8 +192,8 @@ export const SearchClient = ({ clientParams }: Props) => {
                   helperText={nombreValid}
                   FormHelperTextProps={{ sx: { color: 'red' } }}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6} sx={{ pl: 2, mt: 2, minWidth: '130px' }}>
+              </Box>
+              <Box sx={{ m: 1, minWidth: '100px', flex: 1 }}>
                 <TextField
                   sx={{ ...stiloInput }}
                   label='Apellido'
@@ -207,7 +207,7 @@ export const SearchClient = ({ clientParams }: Props) => {
                   helperText={apellidoValid}
                   FormHelperTextProps={{ sx: { color: 'red' } }}
                 />
-              </Grid>
+              </Box>
               <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
                 <Grid display={!!errorMessage ? '' : 'none'} item xs={12} sm={12}>
                   <Alert severity='error'>{errorMessage}</Alert>
@@ -215,17 +215,23 @@ export const SearchClient = ({ clientParams }: Props) => {
                 <Grid display={!isFormValid ? '' : 'none'} item xs={12} sm={12}>
                   <Alert severity='error'>{'verifique el formulario'}</Alert>
                 </Grid>
-                <Grid item xs={1} sm={1}>
-                  <IconButton onClick={onDelete} aria-label='delete'>
+                <Grid item xs={4} sm={2}>
+                  <IconButton color='primary' onClick={onDelete} aria-label='delete'>
                     <AiFillDelete />
                   </IconButton>
                 </Grid>
-                <Grid item xs={11} sm={11}>
+                <Grid item xs={8} sm={10}>
                   <Button
-                    disabled={!isSubmit || isSearching}
+                    disabled={!isFormValid || !isSubmit || isSearching}
                     type='submit'
                     variant='contained'
                     fullWidth
+                    sx={{
+                      '&.Mui-disabled': {
+                        color: 'secondary.main',
+                        backgroundColor: 'text.primary',
+                      },
+                    }}
                     endIcon={isSearching && <AiOutlineLoading className='spinner' />}
                   >
                     {isSearching ? 'Buscando' : 'Buscar'}

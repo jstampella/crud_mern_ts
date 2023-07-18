@@ -23,9 +23,9 @@ export const getClientsAllCtrl = async (req: ClientRequest, res: Response): Prom
 
 export const getClientsCtrl = async (req: ClientRequest, res: Response): Promise<void> => {
   try {
-    const user = req.user?.id;
+    const user = req.user?._id;
     if (!user) throw new MiExcepcion('No existe el id de usuario!', 404);
-    const clients = await ClientModel.find({ user }).populate('user', '-password');
+    const clients = await ClientModel.find({ user }).populate('user', '-password').limit(10);
     httpResponse(res, 200, { status: 'success', data: clients });
   } catch (error) {
     if (error instanceof MiExcepcion) {
@@ -39,7 +39,7 @@ export const getClientsCtrl = async (req: ClientRequest, res: Response): Promise
 export const createClientCtrl = async (req: ClientRequest, res: Response): Promise<void> => {
   try {
     const data = matchedData(req) as IClient;
-    data.user = req.user?.id || '';
+    data.user = req.user?._id || '';
     const responseUser = await createClient(data);
     httpResponse(res, 201, { status: 'success', data: responseUser });
   } catch (error) {

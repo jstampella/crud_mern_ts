@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import queryString from 'query-string';
 import CustomizedTables, { IHeaders } from '../../components/CustomizedTable';
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { AiFillDelete, AiFillEdit, AiOutlineReload } from 'react-icons/ai';
 import { IClient, IClientPagination } from '../../interfaces';
 import { useClientStore } from '../../hooks/useClientStore';
-import { Box, TablePagination } from '@mui/material';
+import { Box, IconButton, TablePagination } from '@mui/material';
 import { SimpleDialogResult } from '../../components/DialogResult';
 import { useDispatch } from 'react-redux';
 import { onChangeStatus, onSelect, statusClient } from '../../store/client';
@@ -52,11 +52,14 @@ export function ClientsPage() {
   useEffect(() => {
     if (status === statusClient.search) {
       setlistado((old) => ({ ...old, isLoading: false, ...listClients }));
+      if (listClients.data.length === 0) notify('No se encontraron resultados.', 'warning');
     }
     if (status === statusClient.clear) {
       cargarLista({});
     }
     if (status === statusClient.checking) setlistado((old) => ({ ...old, isLoading: true }));
+    if (status === statusClient.ok)
+      setlistado((old) => ({ ...old, isLoading: false, ...listClients }));
   }, [status]);
 
   useEffect(() => {
@@ -166,6 +169,13 @@ export function ClientsPage() {
           title={'Eliminar Usuario'}
           onClose={confirmDeleteUser}
         />
+        <IconButton
+          color='inherit'
+          sx={{ ':hover': { color: 'background.paper' }, marginTop: '5px' }}
+          onClick={() => dispatch(onChangeStatus(statusClient.clear))}
+        >
+          <AiOutlineReload />
+        </IconButton>
       </Box>
     </>
   );

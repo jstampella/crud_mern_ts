@@ -52,12 +52,12 @@ export const lightTheme = createTheme({
 export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-    primary: { main: colorConfigs.color6, light: colorConfigs.color3 },
+    primary: { main: colorConfigs.color3, light: colorConfigs.color2 },
     secondary: { main: colorConfigs.color1 },
-    background: { default: colorConfigs.color2, paper: colorConfigs.color1 },
+    background: { default: colorConfigs.color6, paper: colorConfigs.color1 },
     text: {
-      disabled: colorConfigs.color3,
-      primary: colorConfigs.color6,
+      disabled: colorConfigs.color4,
+      primary: colorConfigs.color4,
       secondary: colorConfigs.color4,
     },
     success: { main: '#2d9b33' },

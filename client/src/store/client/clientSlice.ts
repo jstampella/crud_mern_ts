@@ -20,6 +20,7 @@ export interface IInitialState {
   listClients: IClientPagination;
   client: IClient | null;
   errorMessage: string | null;
+  records: IClient[] | null;
 }
 
 const initialState: IInitialState = {
@@ -27,6 +28,7 @@ const initialState: IInitialState = {
   listClients: { data: [], page: 0, limit: 5, total: 0 },
   client: null,
   errorMessage: null,
+  records: null,
 };
 
 export const clientSlice = createSlice({
@@ -50,6 +52,11 @@ export const clientSlice = createSlice({
       state.status = statusClient.saved;
       state.listClients.data.push(payload);
     },
+    onRecords: (state, { payload }: PayloadAction<IClient[]>) => {
+      state.errorMessage = null;
+      state.status = statusClient.completed;
+      state.records = payload;
+    },
     onDelete: (state) => {
       state.errorMessage = null;
       state.listClients.data = state.listClients.data.filter(
@@ -57,6 +64,7 @@ export const clientSlice = createSlice({
       );
       state.client = null;
       state.status = statusClient.deleted;
+      state.listClients.total -= 1;
     },
     onSearch: (state, { payload }: PayloadAction<IClientPagination>) => {
       state.errorMessage = null;
@@ -98,4 +106,5 @@ export const {
   onClearErrorMessage,
   onChangeStatus,
   onChangePage,
+  onRecords,
 } = clientSlice.actions;

@@ -8,7 +8,7 @@ const validatorCreateClient = [
   check('nombre').exists().notEmpty().isLength({ min: 3, max: 20 }),
   check('apellido').exists().notEmpty().isLength({ min: 3, max: 20 }),
   check('sexo').exists().notEmpty().isLength({ min: 1, max: 3 }),
-  check('telefono').optional().notEmpty().isNumeric().isLength({ min: 8, max: 15 }),
+  check('telefono').optional().exists().notEmpty().isNumeric().isLength({ min: 8, max: 15 }),
   (req: Request, res: Response, next: NextFunction): void => {
     return validateResults(req, res, next);
   },

@@ -2,7 +2,6 @@ import { AxiosError } from 'axios';
 import { ApiResponse } from '../interfaces';
 
 export const handleError = (error: unknown) => {
-  console.log(error);
   const axiosError = error as AxiosError;
 
   if (axiosError.code === 'ECONNABORTED') {

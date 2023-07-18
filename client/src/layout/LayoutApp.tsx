@@ -10,12 +10,14 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
-import Container from '@mui/material/Container';
 import { IoMdNotifications } from 'react-icons/io';
 import { AiOutlineDoubleLeft } from 'react-icons/ai';
+import { RiLogoutBoxFill } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { mainListItems } from '../components/ListItems';
-import { useAppSelector, useNotify } from '../hooks';
+import { useAppSelector, useAuthStore, useNotify } from '../hooks';
+import { Tooltip } from '@mui/material';
+import ButtonSwitch from '../components/ButtonSwitch';
 
 const drawerWidth = 240;
 
@@ -74,7 +76,8 @@ interface Props {
 export default function LayoutApp({ children }: Props) {
   const [open, setOpen] = React.useState(true);
   const { notify } = useNotify();
-  const { errorMessage } = useAppSelector((state) => state.client);
+  const { startLogout } = useAuthStore();
+  const { errorMessage, records } = useAppSelector((state) => state.client);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -107,14 +110,27 @@ export default function LayoutApp({ children }: Props) {
           <Typography component='h1' variant='h6' color='inherit' noWrap sx={{ flexGrow: 1 }}>
             ABM USUARIO
           </Typography>
-          <IconButton color='inherit'>
-            <Badge badgeContent={4} color='secondary'>
-              <IoMdNotifications />
-            </Badge>
-          </IconButton>
+          <Tooltip title='Ultimos registros'>
+            <IconButton color='inherit'>
+              <Badge badgeContent={records ? records.length : 0} color='secondary'>
+                <IoMdNotifications />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title='Salir'>
+            <IconButton onClick={startLogout} color='inherit'>
+              <Badge color='secondary'>
+                <RiLogoutBoxFill />
+              </Badge>
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
-      <Drawer variant='permanent' open={open}>
+      <Drawer
+        variant='permanent'
+        open={open}
+        sx={{ display: 'flex', justifyContent: 'space-between' }}
+      >
         <Toolbar
           sx={{
             display: 'flex',
@@ -130,10 +146,11 @@ export default function LayoutApp({ children }: Props) {
         <Divider />
         <List
           component='nav'
-          sx={{ color: 'background.default', a: { ':hover': { color: 'primary.light' } } }}
+          sx={{ color: 'background.default', a: { ':hover': { color: 'primary.light' } }, flex: 1 }}
         >
           {mainListItems}
         </List>
+        <ButtonSwitch />
       </Drawer>
       <Box
         component='main'

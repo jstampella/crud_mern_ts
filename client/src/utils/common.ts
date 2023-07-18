@@ -7,7 +7,7 @@ export const validarNumeros = (str: string): boolean => {
 };
 
 export const validarSoloLetras = (cadena: string): boolean => {
-  const regex = /^[a-zA-Z]+$/;
+  const regex = /^[a-zA-Zá-úÁ-ÚüÜñÑ]+$/;
   return regex.test(cadena);
 };
 
@@ -46,4 +46,25 @@ export const compartirObjetos = <T>(objeto1: T, objeto2: T): boolean => {
   }
 
   return true;
+};
+
+// hex to rgba converter
+export const hexToRgba = (hex: string, alpha: number) => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
+export const removeUndefinedAndEmptyProperties = <T>(obj: T): T => {
+  const newObj = { ...obj };
+  for (const key in newObj) {
+    if (newObj[key] === undefined || newObj[key] === '') {
+      delete newObj[key];
+    } else if (typeof newObj[key] === 'object') {
+      removeUndefinedAndEmptyProperties(newObj[key]);
+    }
+  }
+  return newObj;
 };

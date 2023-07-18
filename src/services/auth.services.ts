@@ -67,7 +67,6 @@ const verifytoken = async (token: string): Promise<IVerifyToken> => {
   try {
     const decode = jwt.verify(token, TOKEN_SECRET) as { id: string };
     const userFound = await UsersModel.findById(decode.id);
-    console.log(userFound);
     if (!userFound) throw new MiExcepcion('usuario inexistente', 401);
     const data: IVerifyToken = {
       _id: userFound._id.toString(),

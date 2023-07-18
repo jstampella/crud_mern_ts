@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { IClientCreate, IClientPagination, IClientSearch } from '../interfaces/client.interfaces';
+import { IClient, IClientCreate, IClientPagination } from '../interfaces/client.interfaces';
 import { useAppSelector } from '.';
 import {
   onChangePage,
@@ -8,6 +8,7 @@ import {
   onCreate,
   onDelete,
   onList,
+  onRecords,
   onSearch,
   onSelect,
   onSetError,
@@ -19,6 +20,7 @@ import {
   deleteClientApi,
   getAllClientsApi,
   getClientByIdApi,
+  getClientByUserApi,
   getClientSearchApi,
   updateClientApi,
 } from '../api/client.api';
@@ -130,6 +132,20 @@ export const useClientStore = () => {
     }
   };
 
+  const getClientByUser = async (): Promise<IClient[] | undefined> => {
+    dispatch(onChangeStatus(statusClient.checking));
+    try {
+      const list = await getClientByUserApi();
+      dispatch(onRecords(list));
+      return list;
+    } catch (error) {
+      dispatch(onSetError((error as Error).message));
+      setTimeout(() => {
+        dispatch(onClearErrorMessage());
+      }, 4000);
+    }
+  };
+
   return {
     // propiedades
     status,
@@ -144,5 +160,6 @@ export const useClientStore = () => {
     updateclient,
     changePage,
     getSearchClient,
+    getClientByUser,
   };
 };

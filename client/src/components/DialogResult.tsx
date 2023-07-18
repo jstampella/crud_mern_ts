@@ -34,14 +34,22 @@ export const SimpleDialogResult = memo((props: SimpleDialogProps) => {
       </DialogContent>
       <DialogActions>
         <Button
-          sx={{ fontWeight: '800', fontFamily: 'inherit', ':hover': { color: 'primary.main' } }}
+          sx={{
+            fontWeight: '800',
+            fontFamily: 'inherit',
+            ':hover': { color: 'background.default' },
+          }}
           color='info'
           onClick={() => handleListItemClick(false)}
         >
           Cancelar
         </Button>
         <Button
-          sx={{ fontWeight: '800', fontFamily: 'inherit', ':hover': { color: 'primary.main' } }}
+          sx={{
+            fontWeight: '800',
+            fontFamily: 'inherit',
+            ':hover': { color: 'background.default' },
+          }}
           color='warning'
           onClick={() => handleListItemClick(true)}
         >

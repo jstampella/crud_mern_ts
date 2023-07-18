@@ -1,7 +1,9 @@
 import {
   Alert,
+  Backdrop,
   Box,
   Button,
+  CircularProgress,
   FormControl,
   FormHelperText,
   Grid,
@@ -16,12 +18,13 @@ import { useForm } from '../../hooks/useForm';
 import { useEffect, useMemo, useState } from 'react';
 import { useNotify } from '../../hooks';
 import { useClientStore } from '../../hooks/useClientStore';
-import { IClientCreate } from '../../interfaces';
+import { IClient, IClientCreate } from '../../interfaces';
 import { onChangeStatus, statusClient } from '../../store/client';
 import { AiFillCloseCircle, AiOutlineLoading } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { formValidations } from '../../helpers/validator.client';
+import { hexToRgba, removeUndefinedAndEmptyProperties } from '../../utils/common';
 
 const formInit = {
   dni: '',
@@ -74,20 +77,27 @@ export const ClientFormPage = () => {
     event.preventDefault();
     setFormSubmitted(true);
     if (!isFormValid) return;
-    if (edit) await updateclient(formState);
-    else await createClient(formState);
+    const validFormt = removeUndefinedAndEmptyProperties<IClientCreate>(formState);
+    if (edit) await updateclient(validFormt);
+    else await createClient(validFormt);
     setFormSubmitted(false);
+  };
+
+  const formatClient = (client: IClient) => {
+    const editClient: IClientCreate = {
+      dni: client.dni?.toString() || '',
+      nombre: client.nombre,
+      apellido: client.apellido,
+      sexo: client.sexo,
+      telefono: client.telefono?.toString() || '',
+    };
+
+    return editClient;
   };
 
   useEffect(() => {
     if (client) {
-      const editClient: IClientCreate = {
-        dni: client.dni.toString(),
-        nombre: client.nombre,
-        apellido: client.apellido,
-        sexo: client.sexo,
-        telefono: client.telefono.toString(),
-      };
+      const editClient = formatClient(client);
       setformData(editClient);
     }
   }, [client]);
@@ -99,6 +109,13 @@ export const ClientFormPage = () => {
   useEffect(() => {
     if (params.id && client?._id !== params.id) {
       getClient(params.id);
+    } else if (client && params.id) {
+      const editClient = formatClient(client);
+      setformData(editClient);
+      dispatch(onChangeStatus(statusClient.edit));
+    } else {
+      setformData(formInit);
+      dispatch(onChangeStatus(statusClient.ok));
     }
   }, [params]);
 
@@ -234,6 +251,22 @@ export const ClientFormPage = () => {
           </Grid>
         </Grid>
       </form>
+      <Backdrop
+        sx={{
+          borderRadius: 5,
+          color: 'primary.main',
+          backgroundColor: (theme) => hexToRgba(theme.palette.secondary.main.toString(), 0.1),
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+        }}
+        open={status === statusClient.checking}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
     </Box>
   );
 };

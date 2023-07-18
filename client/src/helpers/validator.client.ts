@@ -5,13 +5,13 @@ export const formValidations: { [key: string]: [(data: string | number) => boole
     (data: string | number) => {
       return typeof data === 'string' ? data.length >= 3 && validarSoloLetras(data) : false;
     },
-    'El nombre no puede estar vacio',
+    'El nombre no puede estar vacio -> min 3 caracteres',
   ],
   apellido: [
     (data: string | number) => {
       return typeof data === 'string' ? data.length >= 3 && validarSoloLetras(data) : false;
     },
-    'El apellido no puede estar vacio',
+    'El apellido no puede estar vacio -> min 3 caracteres',
   ],
   dni: [
     (data: string | number) => {
@@ -29,7 +29,7 @@ export const formValidations: { [key: string]: [(data: string | number) => boole
   ],
   telefono: [
     (data: string | number) => {
-      return typeof data === 'string' ? validarNumeros(data) && data.length >= 8 : false;
+      return typeof data === 'string' ? (validarNumeros(data) && data.length >= 8) || !data : false;
     },
     'telefono debe ser solo numeros y minimo 8 digitos',
   ],
