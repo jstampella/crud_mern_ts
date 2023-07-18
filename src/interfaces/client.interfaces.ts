@@ -24,3 +24,11 @@ export interface IClientParams {
   limit?: number;
   page?: number;
 }
+
+export interface IClientFilter {
+  apellido?: { $regex: RegExp };
+  dni?: number;
+  nombre?: { $regex: RegExp };
+  sexo?: string;
+  telefono?: number;
+}

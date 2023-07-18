@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Document } from 'mongoose';
 import removeAccents from 'remove-accents';
-import { IClient, IClientParams } from '../interfaces/client.interfaces';
+import { IClient, IClientFilter, IClientParams } from '../interfaces/client.interfaces';
 import { ClientModel } from '../models';
 
+/**
+ * Function to create a customer
+ * @param param0 { dni, nombre, apellido, sexo, telefono, user }
+ * @returns Promise<Document<unknown, any, any>>
+ */
 export const createClient = async ({ dni, nombre, apellido, sexo, telefono, user }: IClient): Promise<Document<unknown, any, any>> => {
   const newTask = new ClientModel({
     dni,
@@ -17,14 +22,11 @@ export const createClient = async ({ dni, nombre, apellido, sexo, telefono, user
   return responseUser;
 };
 
-interface IClientFilter {
-  apellido?: { $regex: RegExp };
-  dni?: number;
-  nombre?: { $regex: RegExp };
-  sexo?: string;
-  telefono?: number;
-}
-
+/**
+ * Function to get all customers by pagination and filter
+ * @param param0 {apellido,dni,limit,nombre,page,sexo,telefono}
+ * @returns Promise<{data: any[];total: number;page: number | undefined;limit: number | undefined;}>
+ */
 export const getClientsAll = async ({
   apellido,
   dni,

@@ -7,6 +7,11 @@ import { ClientModel } from '../models';
 import { ClientRequest, IClient, IClientParams } from '../interfaces/client.interfaces';
 import { createClient, getClientsAll } from '../services/client.services';
 
+/**
+ * Function in charge of obtaining all clients
+ * @param req ClientRequest
+ * @param res Response
+ */
 export const getClientsAllCtrl = async (req: ClientRequest, res: Response): Promise<void> => {
   try {
     const params = matchedData(req) as IClientParams;
@@ -21,6 +26,11 @@ export const getClientsAllCtrl = async (req: ClientRequest, res: Response): Prom
   }
 };
 
+/**
+ * Function in charge of obtaining the clients of the user
+ * @param req ClientRequest
+ * @param res Response
+ */
 export const getClientsCtrl = async (req: ClientRequest, res: Response): Promise<void> => {
   try {
     const user = req.user?._id;
@@ -36,6 +46,11 @@ export const getClientsCtrl = async (req: ClientRequest, res: Response): Promise
   }
 };
 
+/**
+ * Function in charge of creating a client
+ * @param req ClientRequest
+ * @param res Response
+ */
 export const createClientCtrl = async (req: ClientRequest, res: Response): Promise<void> => {
   try {
     const data = matchedData(req) as IClient;
@@ -51,6 +66,11 @@ export const createClientCtrl = async (req: ClientRequest, res: Response): Promi
   }
 };
 
+/**
+ * Function in charge of deleting a client
+ * @param req ClientRequest
+ * @param res Response
+ */
 export const deleteClientCtrl = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = matchedData(req) as IClient;
@@ -66,6 +86,11 @@ export const deleteClientCtrl = async (req: Request, res: Response): Promise<voi
   }
 };
 
+/**
+ * Function in charge of updating a client
+ * @param req ClientRequest
+ * @param res Response
+ */
 export const updateClientCtrl = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id, nombre, apellido, sexo, telefono } = matchedData(req) as IClient;
@@ -80,6 +105,11 @@ export const updateClientCtrl = async (req: Request, res: Response): Promise<voi
   }
 };
 
+/**
+ * Function in charge of obtaining a client by id
+ * @param req ClientRequest
+ * @param res Response
+ */
 export const getClientCtrl = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = matchedData(req) as IClient;

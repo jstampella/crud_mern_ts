@@ -18,10 +18,4 @@ export const loadJson = async (): Promise<void> => {
       logger.warning('Ocurrio un error al cargar el archivo json de clientes');
     }
   }
-  //     if (error) {
-  //       console.error(error);
-  //     } else {
-  //       console.log('Documentos insertados con éxito:', docs.length);
-  //     }
-  //   });
 };

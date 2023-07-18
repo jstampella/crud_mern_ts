@@ -6,6 +6,11 @@ import { matchedData } from 'express-validator';
 import { IUserLogin, IUserRegister } from '../interfaces/auth.interfaces';
 import { loginUser, registerNewUser, verifytoken } from '../services/auth.services';
 
+/**
+ * Function in charge of registering user
+ * @param req Request
+ * @param res Response
+ */
 export const registerCtrl = async (req: Request, res: Response): Promise<void> => {
   try {
     const requestData = matchedData(req) as IUserRegister;
@@ -25,6 +30,11 @@ export const registerCtrl = async (req: Request, res: Response): Promise<void> =
   }
 };
 
+/**
+ * Function in charge of starting user session
+ * @param req Request
+ * @param res Response
+ */
 export const loginCtrl = async (req: Request, res: Response): Promise<void> => {
   try {
     const requestData = matchedData(req) as IUserLogin;
@@ -44,6 +54,11 @@ export const loginCtrl = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+/**
+ * Function in charge of verifying the session token
+ * @param req Request
+ * @param res Response
+ */
 export const verifyTokenCtrl = async (req: Request, res: Response): Promise<void> => {
   try {
     const { token } = req.cookies;
@@ -59,6 +74,11 @@ export const verifyTokenCtrl = async (req: Request, res: Response): Promise<void
   }
 };
 
+/**
+ * Function in charge of closing session
+ * @param req Request
+ * @param res Response
+ */
 export const logoutCtrl = async (_req: Request, res: Response): Promise<void> => {
   res.cookie('token', '', {
     httpOnly: true,

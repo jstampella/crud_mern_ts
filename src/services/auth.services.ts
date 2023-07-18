@@ -6,6 +6,11 @@ import bcrypt from 'bcryptjs';
 import { createAccessToken } from '../utils/jwt';
 import { TOKEN_SECRET } from '../config';
 
+/**
+ * Function to register a user
+ * @param param0 { name, email, password }
+ * @returns Promise<LoginPayload>
+ */
 const registerNewUser = async ({ name, email, password }: IUserRegister): Promise<LoginPayload> => {
   const checkIs = await UsersModel.findOne({ email });
   if (checkIs) throw new MiExcepcion('El mail ya se encuentra registrado', 400);
@@ -38,6 +43,11 @@ const registerNewUser = async ({ name, email, password }: IUserRegister): Promis
   return responseData;
 };
 
+/**
+ * Function to login user
+ * @param param0 { email, password }
+ * @returns Promise<LoginPayload>
+ */
 const loginUser = async ({ email, password }: IUserLogin): Promise<LoginPayload> => {
   const checkIs = await UsersModel.findOne({ email });
   if (!checkIs) throw new MiExcepcion('El mail no se encuentra registrado', 404);
@@ -63,6 +73,11 @@ const loginUser = async ({ email, password }: IUserLogin): Promise<LoginPayload>
   return data;
 };
 
+/**
+ * Function that verifies the token
+ * @param token string
+ * @returns Promise<IVerifyToken>
+ */
 const verifytoken = async (token: string): Promise<IVerifyToken> => {
   try {
     const decode = jwt.verify(token, TOKEN_SECRET) as { id: string };

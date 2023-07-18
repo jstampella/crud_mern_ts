@@ -7,6 +7,12 @@ import { handleHttpError } from '../utils/handleError';
 import MiExcepcion from '../common/MiException';
 import { AuthenticatedRequest, AuthenticatedToken } from '../interfaces/auth.interfaces';
 
+/**
+ * Middleware function to authenticate requests.
+ * @param {AuthenticatedRequest} req - The authenticated request object.
+ * @param {Response} res - The response object.
+ * @param {NextFunction} next - The next middleware function.
+ */
 export const auth = (req: AuthenticatedRequest, res: Response, next: NextFunction): void => {
   try {
     const { token } = req.cookies;
