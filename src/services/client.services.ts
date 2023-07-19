@@ -58,7 +58,7 @@ export const getClientsAll = async ({
     filter['telefono'] = telefono;
   }
   const total = await ClientModel.countDocuments(filter);
-  const nPage = page || 1;
+  const nPage = page || 0;
   const nLimit = limit || total;
   let clients = [];
 

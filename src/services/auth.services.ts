@@ -80,8 +80,8 @@ const loginUser = async ({ email, password }: IUserLogin): Promise<LoginPayload>
  */
 const verifytoken = async (token: string): Promise<IVerifyToken> => {
   try {
-    const decode = jwt.verify(token, TOKEN_SECRET) as { id: string };
-    const userFound = await UsersModel.findById(decode.id);
+    const decode = jwt.verify(token, TOKEN_SECRET) as { _id: string };
+    const userFound = await UsersModel.findById(decode._id);
     if (!userFound) throw new MiExcepcion('usuario inexistente', 401);
     const data: IVerifyToken = {
       _id: userFound._id.toString(),

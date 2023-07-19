@@ -62,6 +62,7 @@ export const loginCtrl = async (req: Request, res: Response): Promise<void> => {
 export const verifyTokenCtrl = async (req: Request, res: Response): Promise<void> => {
   try {
     const { token } = req.cookies;
+    console.log(token);
     if (!token) throw new MiExcepcion('El token no existe', 500);
     const data = await verifytoken(token);
     httpResponse(res, 200, { status: 'success', data });

@@ -10,6 +10,14 @@
 
 > La **base de datos** utilizada es MongoDB, que proporciona soporte en español.
 
+---
+
+### Documentacion Swagger
+
+> Este Proyecto posee documentacion de los endpoint con swagger para poder utilizarlo una vez desplegado el proyecto y puesto en marcha dirigirse a http://localhost:7000/api-docs
+>
+> > Las rutas autenticadas son por cookie de token, por lo que una vez realicen el endpoint en swagger al /auth/login quedan todas las rutas autenticadas.
+
 ## Configuración
 
 Asegúrese de tener **_Node.js_** o **_Docker_** instalados en su máquina.
@@ -43,9 +51,9 @@ Asegúrese de tener **_Node.js_** o **_Docker_** instalados en su máquina.
 
 # Uso
 
----
+### Una vez que el servidor de desarrollo esté en funcionamiento, puede acceder a la aplicación web desde su navegador ingresando http://localhost:3000, para la api desde http://localhost:7000/api
 
-### Una vez que el servidor de desarrollo esté en funcionamiento, puede acceder a la aplicación web desde su navegador ingresando http://localhost:7000, para la api desde http://localhost:7000/api
+- Posee un archivo json que se carga al iniciar el backend para tener un listado de clientes.
 
 ## Licencia
 

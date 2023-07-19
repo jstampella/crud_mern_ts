@@ -4,7 +4,8 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-
+import swaggerUi from 'swagger-ui-express';
+import { specs } from './config/swagger';
 import { FRONTEND_URL } from './config/index';
 import { notFoundHandler } from './middlewares/not-found.middleware';
 import { errorMiddleware } from './middlewares/error.middleware';
@@ -26,6 +27,8 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use('/api', router);
+// Agrega el middleware para servir Swagger UI en la ruta /api-docs
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/dist'));
