@@ -15,9 +15,9 @@ export const formValidations: { [key: string]: [(data: string | number) => boole
   ],
   dni: [
     (data: string | number) => {
-      return typeof data === 'string' ? validarNumeros(data) : false;
+      return typeof data === 'string' ? data.length >= 6 && validarNumeros(data) : false;
     },
-    'dni debe ser solo numeros',
+    'dni debe ser solo numeros -> min 6 digitos',
   ],
   sexo: [
     (data: string | number) => {

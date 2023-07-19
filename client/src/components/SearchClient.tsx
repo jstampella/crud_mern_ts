@@ -155,9 +155,11 @@ export const SearchClient = ({ clientParams }: Props) => {
                   FormHelperTextProps={{ sx: { color: 'red' } }}
                 />
               </Box>
-              <Box sx={{ m: 1, minWidth: '80px' }}>
-                <FormControl sx={{ ...stiloInput, minWidth: '80px' }} size='small'>
-                  <InputLabel id='demo-select-small-label'>Sexo</InputLabel>
+              <Box sx={{ m: 1, minWidth: '100px' }}>
+                <FormControl sx={{ ...stiloInput, minWidth: '100px' }} size='small'>
+                  <InputLabel sx={{ marginTop: '6px' }} id='demo-select-small-label'>
+                    Sexo
+                  </InputLabel>
                   <Select
                     labelId='demo-select-small-label'
                     id='demo-select-small'
@@ -214,18 +216,17 @@ export const SearchClient = ({ clientParams }: Props) => {
                 <Grid display={!isFormValid ? '' : 'none'} item xs={12} sm={12}>
                   <Alert severity='error'>{'verifique el formulario'}</Alert>
                 </Grid>
-                <Grid item xs={4} sm={2}>
+                <Grid item xs={12} sm={12} sx={{ display: 'flex' }}>
                   <IconButton color='primary' onClick={onDelete} aria-label='delete'>
                     <AiFillDelete />
                   </IconButton>
-                </Grid>
-                <Grid item xs={8} sm={10}>
                   <Button
                     disabled={!isFormValid || !isSubmit || isSearching}
                     type='submit'
                     variant='contained'
                     fullWidth
                     sx={{
+                      flex: 1,
                       '&.Mui-disabled': {
                         color: 'secondary.main',
                         backgroundColor: 'text.primary',

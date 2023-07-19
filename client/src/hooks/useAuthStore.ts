@@ -20,6 +20,7 @@ export const useAuthStore = () => {
     dispatch(onCheckingCredentials());
     try {
       const res = await loginApi(user);
+      localStorage.setItem('token', res.token);
       dispatch(onLogin(res));
     } catch (error) {
       dispatch(onLogout((error as Error).message));
@@ -39,6 +40,7 @@ export const useAuthStore = () => {
     try {
       // Aca va la consulta a la api
       const result = await registerApi({ email, password, name });
+      localStorage.setItem('token', result.token);
       dispatch(onLogin(result));
     } catch (error) {
       dispatch(onLogout((error as Error).message));
@@ -50,10 +52,12 @@ export const useAuthStore = () => {
 
   const checkAuthToken = async () => {
     const cookies = Cookies.get();
-    if (!cookies.token) {
+    const token = localStorage.getItem('token');
+    if (!cookies.token && !token) {
       startLogout();
       return;
     }
+    if (!cookies.token && token) Cookies.set('token', token);
     try {
       const res = await verifyTokenRequest();
       if (!res._id) return startLogout();

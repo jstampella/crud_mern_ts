@@ -16,11 +16,11 @@ export const registerCtrl = async (req: Request, res: Response): Promise<void> =
     const requestData = matchedData(req) as IUserRegister;
     const { token, ...responseUser } = await registerNewUser(requestData);
     res.cookie('token', token, {
-      httpOnly: process.env.NODE_ENV !== 'development',
+      httpOnly: false,
       secure: true,
       sameSite: 'none',
     });
-    httpResponse(res, 201, { status: 'success', data: responseUser });
+    httpResponse(res, 201, { status: 'success', data: { ...responseUser, token } });
   } catch (error) {
     if (error instanceof MiExcepcion) {
       handleHttpError(res, error);
@@ -40,11 +40,11 @@ export const loginCtrl = async (req: Request, res: Response): Promise<void> => {
     const requestData = matchedData(req) as IUserLogin;
     const { token, ...responseUser } = await loginUser(requestData);
     res.cookie('token', token, {
-      httpOnly: process.env.NODE_ENV !== 'development',
+      httpOnly: false,
       secure: true,
       sameSite: 'none',
     });
-    httpResponse(res, 200, { status: 'success', data: responseUser });
+    httpResponse(res, 200, { status: 'success', data: { ...responseUser, token } });
   } catch (error) {
     if (error instanceof MiExcepcion) {
       handleHttpError(res, error);
@@ -62,7 +62,6 @@ export const loginCtrl = async (req: Request, res: Response): Promise<void> => {
 export const verifyTokenCtrl = async (req: Request, res: Response): Promise<void> => {
   try {
     const { token } = req.cookies;
-    console.log(token);
     if (!token) throw new MiExcepcion('El token no existe', 500);
     const data = await verifytoken(token);
     httpResponse(res, 200, { status: 'success', data });
